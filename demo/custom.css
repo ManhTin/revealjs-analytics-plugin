@@ -1,0 +1,19 @@
+.reveal,
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  font-family: 'PT Serif', 'Palatino Linotype', serif;
+}
+
+.footnote {
+  font-size: 0.3em;
+  display: block;
+  margin-top: 3em;
+}
+
+.reference {
+  font-size: 0.5em;
+}
