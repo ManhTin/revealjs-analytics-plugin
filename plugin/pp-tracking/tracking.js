@@ -1,5 +1,5 @@
 /*!
- * reveal.js-tracking plugin v1.0.0
+ * revealjs-pp-tracking plugin v1.0.0
  * Manh Tin Nguyen
  * MIT licensed
  *
@@ -77,7 +77,7 @@ const RevealPPTracking =
       media: true,
       slideTransitions: true,
       revealDependencies: {
-        quiz: false,
+        quiz: true,
       },
     };
 
@@ -371,8 +371,8 @@ const RevealPPTracking =
         quizConfig.events = quizConfig.events || {};
 
         function trackQuizStart() {
-          const quizName =
-            Reveal.getCurrentSlide().querySelector("[data-quiz]").dataset.quiz;
+          const currentSlide = Reveal.getCurrentSlide();
+          const quizName = currentSlide.querySelector("[data-quiz]").dataset.quiz;
           if (!quizName) return true;
 
           const quiz = window[quizName];
@@ -392,16 +392,15 @@ const RevealPPTracking =
             numberOfQuestions: quiz.questions.length,
           };
 
-          _track("quiz", {
-            quizEvent: "start",
-            timestamp: globalTimer.toString(),
-            metadata: quizMetadata,
+          _track({
+            eventName: "quiz_start",
+            slide: _slideData(currentSlide),
+            data: quizMetadata,
           });
         }
 
         function trackQuizComplete(options) {
-          const quizName =
-            Reveal.getCurrentSlide().querySelector("[data-quiz]").dataset.quiz;
+          const quizName = Reveal.getCurrentSlide().querySelector("[data-quiz]").dataset.quiz;
           if (!quizName) return true;
 
           const quiz = window[quizName];
@@ -420,13 +419,15 @@ const RevealPPTracking =
             numberOfQuestions: quiz.questions.length,
           };
 
-          _track("quiz", {
-            quizEvent: "complete",
-            dwellTime: dwellTime,
-            completed: true,
-            score: options.score,
-            timestamp: globalTimer.toString(),
-            metadata: quizMetadata,
+          _track({
+            eventName: "quiz_complete",
+            slide: _slideData(Reveal.getCurrentSlide()),
+            data: {
+              ...quizMetadata,
+              dwellTime: dwellTime,
+              completed: true,
+              score: options.score,
+            }
           });
         }
 

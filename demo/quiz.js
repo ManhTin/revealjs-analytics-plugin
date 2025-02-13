@@ -1,6 +1,6 @@
 quiz = {
   info: {
-    name: "Test Your Knowledge!!",
+    name: "Test Your Knowledge!",
     main: "Can you recall the things you just learned?",
     level1: "Your Level: Composer",
     level2: "Your Level: Conductor",

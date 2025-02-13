@@ -154,7 +154,7 @@
 
 
 			<section>
-				<script data-quiz src="demo/quiz.js"></script>
+				<script data-quiz="quiz" src="demo/quiz.js"></script>
 			</section>
 
 			<!-- References -->
@@ -181,21 +181,21 @@
 	<script src="plugin/markdown/markdown.js"></script>
 	<script src="plugin/highlight/highlight.js"></script>
 	<script src="plugin/pp-tracking/tracking.js"></script>
-	<!-- <script src="plugin/quiz/js/quiz.js"></script> -->
 	<script>
 		// More info about initialization & config:
 		// - https://revealjs.com/initialization/
 		// - https://revealjs.com/config/
 		Reveal.initialize({
 			hash: true,
-
+			quiz: {
+				preventUnanswered: true,
+				skipStartButton: false,
+			},
 			// Learn about plugins: https://revealjs.com/plugins/
-			plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealPPTracking],
 			dependencies: [
-				// other dependencies
-				{ src: 'plugin/quiz/js/quiz.js', async: true, callback: function () { prepareQuizzes({ preventUnanswered: true }); } }
-				// other dependencies
-			]
+				{ src: 'plugin/quiz/js/quiz.js' }
+			],
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealPPTracking],
 		});
 	</script>
 </body>
