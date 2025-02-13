@@ -17,3 +17,8 @@
 .reference {
   font-size: 0.5em;
 }
+
+.quizArea {
+  font-size: 0.8em;
+  padding: 1em !important;
+}

@@ -1,28 +1,69 @@
 quiz = {
   info: {
     name: "Test Your Knowledge!!",
-    main: "Think you're smart enough to be on Jeopardy? Find out with this super crazy knowledge quiz!",
-    level1: "Jeopardy Ready",
-    level2: "Jeopardy Contender",
-    level3: "Jeopardy Amateur",
-    level4: "Jeopardy Newb",
-    level5: "Stay in school, kid...", // no comma here
+    main: "Can you recall the things you just learned?",
+    level1: "Your Level: Composer",
+    level2: "Your Level: Conductor",
+    level3: "Your Level: Concert Master",
+    level4: "Your Level: Beginner Violinist",
+    level5: "Your Level: Non-musician",
   },
   questions: [
     {
-      // Question 1 - Multiple Choice, Single True Answer
-      q: "What number is the letter A in the English alphabet?",
+      q: "When in which year was the debut?",
       a: [
-        { option: "8", correct: false },
-        { option: "14", correct: false },
-        { option: "1", correct: true },
-        { option: "23", correct: false }, // no comma here
+        { option: "1900", correct: false },
+        { option: "1905", correct: true },
+        { option: "1909", correct: false },
       ],
-      correct:
-        "<p><span>That's right!</span> The letter A is the first letter in the alphabet!</p>",
-      incorrect:
-        "<p><span>Uhh no.</span> It's the first letter of the alphabet. Did you actually <em>go</em> to kindergarden?</p>", // no comma here
+      correct: "<p><span>That's right!</span></p>",
+      incorrect: "<p><span>Sorry, wrong try again!</span></p>",
     },
-    // more questions here
+    {
+      q: "Debussy spent most of the time composing at the Atlantic Ocean?",
+      a: [
+        { option: "True", correct: false },
+        { option: "False", correct: true },
+      ],
+      correct: "<p><span>That's right!</span></p>",
+      incorrect: "<p><span>Sorry, wrong try again!</span></p>",
+    },
+    {
+      q: "The public immediately loved La Mer?",
+      a: [
+        { option: "True", correct: false },
+        { option: "False", correct: true },
+      ],
+      correct: "<p><span>That's right!</span></p>",
+      incorrect: "<p><span>Sorry, wrong try again!</span></p>",
+    },
+    {
+      q: "When in which year was the debut?",
+      a: [
+        { option: "1900", correct: false },
+        { option: "1905", correct: true },
+        { option: "1909", correct: false },
+      ],
+      correct: "<p><span>That's right!</span></p>",
+      incorrect: "<p><span>Sorry, wrong try again!</span></p>",
+    },
+    {
+      q: "Debussy spent most of the time composing at the Atlantic Ocean?",
+      a: [
+        { option: "True", correct: false },
+        { option: "False", correct: true },
+      ],
+      correct: "<p><span>That's right!</span></p>",
+      incorrect: "<p><span>Sorry, wrong try again!</span></p>",
+    },
+    {
+      q: "The public immediately loved La Mer?",
+      a: [
+        { option: "True", correct: false },
+        { option: "False", correct: true },
+      ],
+      correct: "<p><span>That's right!</span></p>",
+      incorrect: "<p><span>Sorry, wrong try again!</span></p>",
+    },
   ],
 };
