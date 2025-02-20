@@ -1,3 +1,11 @@
+/*!
+ * revealjs-pp-tracking plugin v1.0.0
+ * Manh Tin Nguyen
+ * MIT licensed
+ *
+ * Copyright (C) 2025 Manh Tin Nguyen
+ */
+
 import { Timer } from "./timer";
 
 const Plugin = () => {
@@ -14,6 +22,8 @@ const Plugin = () => {
   };
 
   const config = { ...defaultConfig, ...Reveal.getConfig().ppTracking };
+
+  let events = [];
 
   /**
    * Validate API configuration for tracking plug-in.
@@ -120,24 +130,12 @@ const Plugin = () => {
   // #### Tracking ####
 
   function _track(payload) {
-    if (config.debug) {
-      console.log("Tracked Event:", {
-        presentationId: config.apiConfig.presentationId,
-        ...payload,
-        timestamp: new Date().toISOString(),
-        url: PRESENTATION_URL,
-      });
-    }
-
-    navigator.sendBeacon(
-      config.apiConfig.trackingAPI,
-      JSON.stringify({
-        presentationId: config.apiConfig.presentationId,
-        ...payload,
-        timestamp: new Date().toISOString(),
-        url: PRESENTATION_URL,
-      }),
-    );
+    events.push({
+      presentationId: config.apiConfig.presentationId,
+      ...payload,
+      timestamp: new Date().toISOString(),
+      url: PRESENTATION_URL,
+    });
   }
 
   /**
@@ -177,6 +175,19 @@ const Plugin = () => {
     }
   }
 
+  function _sentData() {
+    if (events.length > 0) {
+      if (config.debug) {
+        console.log("🚀 ~ _sentData ~ events:", events);
+      }
+      navigator.sendBeacon(
+        config.apiConfig.trackingAPI,
+        JSON.stringify(events),
+      );
+      events = [];
+    }
+  }
+
   /**
    * Track last dwell time per slide and total dwell time.
    * Also send data to trackingAPI.
@@ -196,6 +207,8 @@ const Plugin = () => {
             : null,
         },
       });
+
+      _sentData();
     });
   }
 
