@@ -177,25 +177,35 @@
 	</div>
 
 	<script src="dist/reveal.js"></script>
-	<script src="plugin/notes/notes.js"></script>
-	<script src="plugin/markdown/markdown.js"></script>
-	<script src="plugin/highlight/highlight.js"></script>
-	<script src="plugin/pp-tracking/tracking.js"></script>
+	<script src="plugin/pp-tracking/pp-tracking.js"></script>
 	<script>
 		// More info about initialization & config:
 		// - https://revealjs.com/initialization/
 		// - https://revealjs.com/config/
 		Reveal.initialize({
 			hash: true,
+
 			quiz: {
 				preventUnanswered: true,
 				skipStartButton: false,
 			},
-			// Learn about plugins: https://revealjs.com/plugins/
+
+			ppTracking: {
+				apiConfig: { trackingAPI: "http://localhost:3000/api/track_event", presentationId: "cm7cevbx30000jtgkatdnfy6d" },
+				dwellTimes: true,
+				links: true,
+				media: true,
+				slideTransitions: true,
+				revealDependencies: {
+					quiz: true,
+				},
+				debug: true,
+			},
+
 			dependencies: [
-				{ src: 'plugin/quiz/js/quiz.js' }
+				{ src: 'plugin/quiz/js/quiz.js' },
 			],
-			plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealPPTracking],
+			plugins: [RevealPPTracking],
 		});
 	</script>
 </body>
