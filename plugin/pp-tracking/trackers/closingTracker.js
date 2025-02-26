@@ -1,9 +1,10 @@
-import { tracksTotalDwellTime } from "../utils";
+import { getSlideNumber, tracksTotalDwellTime } from "../utils";
 
 /**
  * Tracks user leaving the presentation and sends data
  * @param {Object} config - The plugin configuration
- * @param {Array} logPresentationViewEvents - Array to store presentation view events
+ * @param {Array} logPresentationStartEvents - Array to store presentation start events
+ * @param {Array} logPresentationCloseEvents - Array to store presentation close events
  * @param {Array} logSlideViewEvents - Array to store slide view events
  * @param {Array} logLinkActionEvents - Array to store link action events
  * @param {Array} logMediaActionEvents - Array to store media action events
@@ -13,7 +14,8 @@ import { tracksTotalDwellTime } from "../utils";
 export const trackClosing = (
   config,
   {
-    logPresentationViewEvents,
+    logPresentationStartEvents,
+    logPresentationCloseEvents,
     logSlideViewEvents,
     logLinkActionEvents,
     logMediaActionEvents,
@@ -22,11 +24,13 @@ export const trackClosing = (
   globalTimer,
 ) => {
   window.addEventListener("beforeunload", () => {
+    const currentSlide = Reveal.getCurrentSlide();
     const presentationUrl = window.location.href.replace(/(#(.+)?)/, "");
 
-    logPresentationViewEvents.push({
+    logPresentationCloseEvents.push({
       presentationId: config.apiConfig.presentationId,
       presentationUrl,
+      slideNumber: getSlideNumber(currentSlide),
       timestamp: new Date().toISOString(),
       finalProgress: Reveal.getProgress(),
       totalDwellTime: tracksTotalDwellTime(config)
@@ -35,7 +39,8 @@ export const trackClosing = (
     });
 
     const payload = {
-      logPresentationViewEvents,
+      logPresentationStartEvents,
+      logPresentationCloseEvents,
       logSlideViewEvents,
       logLinkActionEvents,
       logMediaActionEvents,

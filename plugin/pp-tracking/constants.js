@@ -40,4 +40,4 @@ export const DEFAULT_CONFIG = {
 };
 
 // Reveal.js events to track
-export const TRACKED_REVEAL_EVENTS = ["slidechanged", "ready"];
+export const REVEAL_READY_EVENT = "ready";

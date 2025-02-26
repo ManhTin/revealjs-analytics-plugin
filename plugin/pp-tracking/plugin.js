@@ -14,6 +14,7 @@ import {
   trackLinks,
   trackMediaActions,
   trackQuizzes,
+  trackStart,
 } from "./trackers";
 import { tracksDwellTimePerSlide, tracksTotalDwellTime } from "./utils";
 
@@ -27,7 +28,8 @@ const Plugin = () => {
 
   // Event logging arrays
   const eventLogs = {
-    logPresentationViewEvents: [],
+    logPresentationStartEvents: [],
+    logPresentationCloseEvents: [],
     logSlideViewEvents: [],
     logLinkActionEvents: [],
     logMediaActionEvents: [],
@@ -61,6 +63,9 @@ const Plugin = () => {
    * Adds all event listeners for tracking
    */
   const addEventListeners = () => {
+    // Track presentation start
+    trackStart(config, eventLogs.logPresentationStartEvents);
+
     // Track dwell times
     trackDwellTimes(config, eventLogs.logSlideViewEvents, slideTimer);
 
