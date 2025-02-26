@@ -226,7 +226,6 @@ const RevealPPTracking =
     function _trackDwellTimes() {
       if (_tracksDwellTimePerSlide()) {
         Reveal.addEventListener("slidechanged", (event) => {
-          console.log("🚀 ~ Reveal.addEventListener ~ event:", event);
           if (!event.previousSlide) return;
 
           _track({
@@ -486,7 +485,6 @@ const RevealPPTracking =
       _trackLinks();
       _trackMediaActions();
       _trackQuizzes();
-      console.log("🚀 ~ addEventListeners");
     }
 
     return {

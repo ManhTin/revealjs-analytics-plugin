@@ -8,7 +8,7 @@
   "files": {
     "include": ["demo/**/*", "plugin/pp-tracking/**/*"],
     "ignoreUnknown": false,
-    "ignore": []
+    "ignore": ["pp-tracking.js", "pp-tracking.esm.js"]
   },
   "formatter": {
     "enabled": true,
