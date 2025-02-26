@@ -37,33 +37,5 @@ quiz = {
       correct: "<p><span>That's right!</span></p>",
       incorrect: "<p><span>Sorry, wrong try again!</span></p>",
     },
-    {
-      q: "When in which year was the debut?",
-      a: [
-        { option: "1900", correct: false },
-        { option: "1905", correct: true },
-        { option: "1909", correct: false },
-      ],
-      correct: "<p><span>That's right!</span></p>",
-      incorrect: "<p><span>Sorry, wrong try again!</span></p>",
-    },
-    {
-      q: "Debussy spent most of the time composing at the Atlantic Ocean?",
-      a: [
-        { option: "True", correct: false },
-        { option: "False", correct: true },
-      ],
-      correct: "<p><span>That's right!</span></p>",
-      incorrect: "<p><span>Sorry, wrong try again!</span></p>",
-    },
-    {
-      q: "The public immediately loved La Mer?",
-      a: [
-        { option: "True", correct: false },
-        { option: "False", correct: true },
-      ],
-      correct: "<p><span>That's right!</span></p>",
-      incorrect: "<p><span>Sorry, wrong try again!</span></p>",
-    },
   ],
 };

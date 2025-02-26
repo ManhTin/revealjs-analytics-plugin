@@ -372,7 +372,8 @@ const RevealPPTracking =
 
         function trackQuizStart() {
           const currentSlide = Reveal.getCurrentSlide();
-          const quizName = currentSlide.querySelector("[data-quiz]").dataset.quiz;
+          const quizName =
+            currentSlide.querySelector("[data-quiz]").dataset.quiz;
           if (!quizName) return true;
 
           const quiz = window[quizName];
@@ -400,7 +401,8 @@ const RevealPPTracking =
         }
 
         function trackQuizComplete(options) {
-          const quizName = Reveal.getCurrentSlide().querySelector("[data-quiz]").dataset.quiz;
+          const quizName =
+            Reveal.getCurrentSlide().querySelector("[data-quiz]").dataset.quiz;
           if (!quizName) return true;
 
           const quiz = window[quizName];
@@ -427,7 +429,7 @@ const RevealPPTracking =
               dwellTime: dwellTime,
               completed: true,
               score: options.score,
-            }
+            },
           });
         }
 

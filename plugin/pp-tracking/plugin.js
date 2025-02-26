@@ -23,7 +23,31 @@ const Plugin = () => {
 
   const config = { ...defaultConfig, ...Reveal.getConfig().ppTracking };
 
-  let events = [];
+  const logPresentationViewEvents = [];
+  const logSlideViewEvents = [];
+  const logLinkActionEvents = [];
+  const logMediaActionEvents = [];
+  const logQuizActionEvents = [];
+
+  const LinkTypes = {
+    INTERNAL: "INTERNAL",
+    EXTERNAL: "EXTERNAL",
+  };
+
+  const MediaTypes = {
+    AUDIO: "AUDIO",
+    VIDEO: "VIDEO",
+  };
+
+  const MediaEventTypes = {
+    PLAY: "PLAY",
+    PAUSE: "PAUSE",
+  };
+
+  const QuizEventTypes = {
+    START: "START",
+    COMPLETE: "COMPLETE",
+  };
 
   /**
    * Validate API configuration for tracking plug-in.
@@ -164,10 +188,12 @@ const Plugin = () => {
       Reveal.addEventListener("slidechanged", (event) => {
         if (!event.previousSlide) return;
 
-        _track({
-          eventName: "dwellTimePerSlide",
+        logSlideViewEvents.push({
+          presentationId: config.apiConfig.presentationId,
+          presentationUrl: PRESENTATION_URL,
+          timestamp: new Date().toISOString(),
           slideNumber: _slideData(event.previousSlide),
-          data: { dwellTime: slideTimer.toString() },
+          dwellTime: slideTimer.getTime(),
         });
 
         slideTimer.reset();
@@ -176,16 +202,19 @@ const Plugin = () => {
   }
 
   function _sentData() {
-    if (events.length > 0) {
-      if (config.debug) {
-        console.log("🚀 ~ _sentData ~ events:", events);
-      }
-      navigator.sendBeacon(
-        config.apiConfig.trackingAPI,
-        JSON.stringify(events),
-      );
-      events = [];
+    const payload = {
+      logPresentationViewEvents: logPresentationViewEvents,
+      logSlideViewEvents: logSlideViewEvents,
+      logLinkActionEvents: logLinkActionEvents,
+      logMediaActionEvents: logMediaActionEvents,
+      logQuizActionEvents: logQuizActionEvents,
+    };
+
+    if (config.debug) {
+      console.log("🚀 ~ sending events");
     }
+
+    navigator.sendBeacon(config.apiConfig.trackingAPI, JSON.stringify(payload));
   }
 
   /**
@@ -196,16 +225,12 @@ const Plugin = () => {
     window.addEventListener("beforeunload", () => {
       const currentSlide = Reveal.getCurrentSlide();
 
-      _track({
-        eventName: "exit",
-        slideNumber: _slideData(currentSlide),
-        data: {
-          finalProgress: Reveal.getProgress(),
-          dwellTime: _tracksDwellTimePerSlide() ? slideTimer.toString() : null,
-          totalDwellTime: _tracksTotalDwellTime()
-            ? globalTimer.toString()
-            : null,
-        },
+      logPresentationViewEvents.push({
+        presentationId: config.apiConfig.presentationId,
+        presentationUrl: PRESENTATION_URL,
+        timestamp: new Date().toISOString(),
+        finalProgress: Reveal.getProgress(),
+        totalDwellTime: _tracksTotalDwellTime() ? globalTimer.getTime() : null,
       });
 
       _sentData();
@@ -222,15 +247,13 @@ const Plugin = () => {
           !Array.from(Reveal.getCurrentSlide().querySelectorAll("a")).includes(
             event.target,
           )
-        )
-          return true;
+        ) return true;
+
         const baseURL = window.location.href.replace(
           new RegExp(window.location.hash) || "",
           "",
         );
         const path = event.target.href.replace(baseURL, "");
-
-        if (path === "#") return true;
 
         const isInternalLink = path.startsWith("#");
 
@@ -238,18 +261,20 @@ const Plugin = () => {
           (isInternalLink && _tracksInternalLinks()) ||
           (!isInternalLink && _tracksExternalLinks())
         ) {
-          const linkType = isInternalLink ? "internalLink" : "externalLink";
+          const linkType = isInternalLink
+            ? LinkTypes.INTERNAL
+            : LinkTypes.EXTERNAL;
           const href = isInternalLink ? path : event.target.href;
           const currentSlide = Reveal.getCurrentSlide();
 
-          _track({
-            eventName: "linkClick",
+          logLinkActionEvents.push({
+            presentationId: config.apiConfig.presentationId,
+            presentationUrl: PRESENTATION_URL,
+            timestamp: new Date().toISOString(),
             slideNumber: _slideData(currentSlide),
-            data: {
-              linkType: linkType,
-              href: href,
-              linkText: event.target.text.trim(),
-            },
+            linkType: linkType,
+            linkUrl: href,
+            linkText: event.target.text.trim(),
           });
         }
       });
@@ -265,36 +290,45 @@ const Plugin = () => {
         const mediaElements = _getMedia();
         for (const media of mediaElements) {
           const currentSlide = Reveal.getCurrentSlide();
-          const mediaType = media.tagName.toLowerCase();
+
+          const mediaMetadata = {
+            mediaId: media.id,
+            mediaType:
+              media.tagName === "AUDIO" ? MediaTypes.AUDIO : MediaTypes.VIDEO,
+            presentationId: config.apiConfig.presentationId,
+            presentationUrl: PRESENTATION_URL,
+          };
 
           if (!media.onplay) {
             media.onplay = function () {
-              _track({
-                eventName: `${mediaType}_play`,
+              logMediaActionEvents.push({
+                timestamp: new Date().toISOString(),
+                actionType: MediaEventTypes.PLAY,
                 slideNumber: _slideData(currentSlide),
-                data: {
-                  id: this.id,
-                  mediaSource: this.currentSrc,
-                  currentTime: this.currentTime,
-                  duration: this.duration,
-                },
+                mediaSource: this.currentSrc,
+                currentTime: Number.parseInt(this.currentTime),
+                totalDuration: Number.parseInt(this.duration),
+                ...mediaMetadata,
               });
+              console.log(
+                "🚀 ~ trackMediaEvents ~ logMediaActionEvents:",
+                logMediaActionEvents,
+              );
             };
           }
 
           if (!media.onpause) {
             media.onpause = function () {
-              _track({
-                eventName: `${mediaType}_pause`,
+              logMediaActionEvents.push({
+                timestamp: new Date().toISOString(),
+                actionType: MediaEventTypes.PAUSE,
                 slideNumber: _slideData(currentSlide),
-                data: {
-                  id: this.id,
-                  mediaSource: this.currentSrc,
-                  finished: this.ended,
-                  progress: this.currentTime / this.duration,
-                  currentTime: this.currentTime,
-                  duration: this.duration,
-                },
+                mediaSource: this.currentSrc,
+                currentTime: Number.parseInt(this.currentTime),
+                totalDuration: Number.parseInt(this.duration),
+                progress: this.currentTime / this.duration,
+                finished: this.ended,
+                ...mediaMetadata,
               });
             };
           }
@@ -334,16 +368,18 @@ const Plugin = () => {
         }
 
         const quizMetadata = {
-          id: quizName,
-          name: quiz.info.name,
-          topic: quiz.info.main,
+          quizId: quizName,
+          quizName: quiz.info.name,
           numberOfQuestions: quiz.questions.length,
+          presentationId: config.apiConfig.presentationId,
+          presentationUrl: PRESENTATION_URL,
         };
 
-        _track({
-          eventName: "quiz_start",
+        logQuizActionEvents.push({
+          timestamp: new Date().toISOString(),
           slideNumber: _slideData(currentSlide),
-          data: quizMetadata,
+          actionType: QuizEventTypes.START,
+          ...quizMetadata,
         });
       }
 
@@ -357,26 +393,24 @@ const Plugin = () => {
 
         let dwellTime;
         if (quizTimers[quizName] instanceof Timer) {
-          dwellTime = quizTimers[quizName].toString();
+          dwellTime = quizTimers[quizName].getTime();
           quizTimers[quizName].clear();
         }
 
         const quizMetadata = {
-          id: quizName,
-          name: quiz.info.name,
-          topic: quiz.info.main,
+          quizId: quizName,
+          quizName: quiz.info.name,
           numberOfQuestions: quiz.questions.length,
         };
 
-        _track({
-          eventName: "quiz_complete",
+        logQuizActionEvents.push({
+          timestamp: new Date().toISOString(),
+          actionType: QuizEventTypes.COMPLETE,
           slideNumber: _slideData(Reveal.getCurrentSlide()),
-          data: {
-            ...quizMetadata,
-            dwellTime: dwellTime,
-            completed: true,
-            score: options.score,
-          },
+          dwellTime: dwellTime,
+          completed: true,
+          score: options.score,
+          ...quizMetadata,
         });
       }
 
@@ -427,7 +461,6 @@ const Plugin = () => {
    * Add all event listeners for tracking.
    */
   function addEventListeners() {
-    _trackRevealEvents();
     _trackDwellTimes();
     _trackClosing();
     _trackLinks();

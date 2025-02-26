@@ -11,8 +11,6 @@
  */
 export class Timer {
   constructor() {
-    this.hours = 0;
-    this.minutes = 0;
     this.seconds = 0;
   }
 
@@ -21,7 +19,7 @@ export class Timer {
       console.log("The timer is already running.");
     } else {
       this.timer = setInterval(() => {
-        this._incrementSecond();
+        this.seconds++;
       }, 1000);
     }
   }
@@ -36,28 +34,22 @@ export class Timer {
       clearInterval(this.timer);
       this.timer = undefined;
     }
-    this.hours = 0;
-    this.minutes = 0;
     this.seconds = 0;
   }
 
-  toString() {
-    const hourString = this.hours > 9 ? this.hours : `0${this.hours}`;
-    const minuteString = this.minutes > 9 ? this.minutes : `0${this.minutes}`;
-    const secondString = this.seconds > 9 ? this.seconds : `0${this.seconds}`;
-
-    return `${hourString}:${minuteString}:${secondString}`;
+  getTime() {
+    return this.seconds;
   }
 
-  _incrementSecond() {
-    this.seconds++;
-    if (this.seconds >= 60) {
-      this.seconds = 0;
-      this.minutes++;
-      if (this.minutes >= 60) {
-        this.minutes = 0;
-        this.hours++;
-      }
-    }
+  toString() {
+    const hours = Math.floor(this.seconds / 3600);
+    const minutes = Math.floor((this.seconds % 3600) / 60);
+    const seconds = this.seconds % 60;
+
+    const hourString = hours > 9 ? hours : `0${hours}`;
+    const minuteString = minutes > 9 ? minutes : `0${minutes}`;
+    const secondString = seconds > 9 ? seconds : `0${seconds}`;
+
+    return `${hourString}:${minuteString}:${secondString}`;
   }
 }
