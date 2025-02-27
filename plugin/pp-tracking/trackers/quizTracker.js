@@ -81,7 +81,7 @@ export const trackQuizzes = (config, logQuizActionEvents) => {
       slideNumber: getSlideNumber(currentSlide),
       dwellTime,
       completed: true,
-      score: options.score,
+      score: options.score / quiz.questions.length,
       ...quizMetadata,
     });
 
