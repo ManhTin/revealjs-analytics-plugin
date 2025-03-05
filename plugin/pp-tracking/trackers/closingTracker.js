@@ -22,6 +22,7 @@ export const trackClosing = (
     logQuizActionEvents,
   },
   globalTimer,
+  optOutManager,
 ) => {
   window.addEventListener("beforeunload", () => {
     const currentSlide = Reveal.getCurrentSlide();
@@ -51,6 +52,11 @@ export const trackClosing = (
       console.log("🚀 ~ sending events:", payload);
     }
 
-    navigator.sendBeacon(config.apiConfig.trackingAPI, JSON.stringify(payload));
+    if (optOutManager.isTrackingAllowed()) {
+      navigator.sendBeacon(
+        config.apiConfig.trackingAPI,
+        JSON.stringify(payload),
+      );
+    }
   });
 };

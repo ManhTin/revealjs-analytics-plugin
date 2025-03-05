@@ -36,6 +36,9 @@ export const DEFAULT_CONFIG = {
   revealDependencies: {
     quiz: false,
   },
+  optOut: {
+    popupDelay: 1000, // ms to wait before showing popup
+  },
   debug: false,
 };
 

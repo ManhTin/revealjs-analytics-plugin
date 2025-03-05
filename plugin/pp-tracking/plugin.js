@@ -7,6 +7,7 @@
  */
 
 import { DEFAULT_CONFIG } from "./constants";
+import { OptOutManager } from "./opt-out";
 import { Timer } from "./timer";
 import {
   trackClosing,
@@ -36,6 +37,9 @@ const Plugin = () => {
     logQuizActionEvents: [],
   };
 
+  // Initialize opt-out manager
+  const optOutManager = new OptOutManager(config.optOut);
+
   // Validate API configuration
   if (!config.apiConfig.trackingAPI) {
     console.error(
@@ -63,6 +67,14 @@ const Plugin = () => {
    * Adds all event listeners for tracking
    */
   const addEventListeners = () => {
+    // Only add trackers if tracking is allowed
+    if (!optOutManager.isTrackingAllowed()) {
+      if (config.debug) {
+        console.log("User opted out of tracking, no events will be tracked");
+      }
+      return;
+    }
+
     // Track presentation start
     trackStart(config, eventLogs.logPresentationStartEvents);
 
@@ -70,7 +82,7 @@ const Plugin = () => {
     trackDwellTimes(config, eventLogs.logSlideViewEvents, slideTimer);
 
     // Track user leaving presentation
-    trackClosing(config, eventLogs, globalTimer);
+    trackClosing(config, eventLogs, globalTimer, optOutManager);
 
     // Track links
     trackLinks(config, eventLogs.logLinkActionEvents);
@@ -82,15 +94,30 @@ const Plugin = () => {
     trackQuizzes(config, eventLogs.logQuizActionEvents);
   };
 
+  function setupOptOut() {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = "plugin/pp-tracking/css/opt-out.css";
+    document.head.appendChild(link);
+
+    // Initialize opt-out manager
+    optOutManager.init();
+  }
+
   return {
     id: "pp-tracking",
     init: () => {
+      if (config.optOut) setupOptOut();
+
+      // Start tracking only if allowed
       addEventListeners();
       startTimers();
 
       if (config.debug) {
         console.log("Initialized pp-tracking plugin");
         console.log("Plugin Config:", config);
+        console.log("Tracking allowed:", optOutManager.isTrackingAllowed());
       }
     },
   };
