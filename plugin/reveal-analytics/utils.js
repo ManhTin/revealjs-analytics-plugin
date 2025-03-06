@@ -1,5 +1,5 @@
 /**
- * Utility functions for PP Tracking plugin
+ * Utility functions for reveal-analytics plugin
  */
 
 /**

@@ -167,7 +167,7 @@
 	</div>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
-	<script src="plugin/pp-tracking/pp-tracking.js"></script>
+	<script src="plugin/reveal-analytics/reveal-analytics.js"></script>
 	<script>
 		// More info about initialization & config:
 		// - https://revealjs.com/initialization/
@@ -180,7 +180,7 @@
 				skipStartButton: false,
 			},
 
-			ppTracking: {
+			revealAnalytics: {
 				apiConfig: { trackingAPI: "http://localhost:3000/api/track_event", presentationId: "cm7cezgiz0002jtgkryn6o95b" },
 				dwellTimes: true,
 				links: true,
@@ -195,7 +195,7 @@
 			dependencies: [
 				{ src: 'plugin/quiz/js/quiz.js' },
 			],
-			plugins: [RevealPPTracking],
+			plugins: [RevealAnalytics],
 		});
 	</script>
 </body>

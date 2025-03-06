@@ -1,5 +1,5 @@
 /*!
- * revealjs-pp-tracking plugin v1.0.0
+ * reveal-analytics plugin v1.0.0
  * Manh Tin Nguyen
  * MIT licensed
  *
@@ -98,7 +98,7 @@ const Plugin = () => {
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.type = "text/css";
-    link.href = "plugin/pp-tracking/css/opt-out.css";
+    link.href = "plugin/reveal-analytics/css/opt-out.css";
     document.head.appendChild(link);
 
     // Initialize opt-out manager
@@ -106,7 +106,7 @@ const Plugin = () => {
   }
 
   return {
-    id: "pp-tracking",
+    id: "reveal-analytics",
     init: () => {
       if (config.optOut) setupOptOut();
 
@@ -115,7 +115,7 @@ const Plugin = () => {
       startTimers();
 
       if (config.debug) {
-        console.log("Initialized pp-tracking plugin");
+        console.log("Initialized reveal-analytics plugin");
         console.log("Plugin Config:", config);
         console.log("Tracking allowed:", optOutManager.isTrackingAllowed());
       }

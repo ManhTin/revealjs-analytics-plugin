@@ -1,5 +1,5 @@
 /*!
- * revealjs-pp-tracking plugin v1.0.0
+ * reveal-analytics plugin v1.0.0
  * Manh Tin Nguyen
  * MIT licensed
  *

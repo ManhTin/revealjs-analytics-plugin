@@ -44,9 +44,9 @@ gulp.task("plugins", () => {
   return Promise.all(
     [
       {
-        name: "RevealPPTracking",
-        input: "./plugin/pp-tracking/plugin.js",
-        output: "./plugin/pp-tracking/pp-tracking",
+        name: "RevealAnalytics",
+        input: "./plugin/reveal-analytics/plugin.js",
+        output: "./plugin/reveal-analytics/reveal-analytics",
       },
     ].map((plugin) => {
       return rollup({

@@ -1,9 +1,9 @@
 {
-  "name": "reveal.js-pp-tracking",
+  "name": "reveal-analytics",
   "version": "1.0.0",
   "description": "Privacy preserving tracking plugin for reveal.js",
-  "main": "plugin/pp-tracking/pp-tracking.js",
-  "module": "plugin/pp-tracking/pp-tracking.esm.js",
+  "main": "plugin/reveal-analytics/reveal-analytics.js",
+  "module": "plugin/reveal-analytics/reveal-analytics.esm.js",
   "license": "MIT",
   "scripts": {
     "test": "gulp test",

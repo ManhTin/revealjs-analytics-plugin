@@ -6,9 +6,9 @@
     "useIgnoreFile": false
   },
   "files": {
-    "include": ["demo/**/*", "plugin/pp-tracking/**/*"],
+    "include": ["demo/**/*", "plugin/reveal-analytics/**/*"],
     "ignoreUnknown": false,
-    "ignore": ["pp-tracking.js", "pp-tracking.esm.js"]
+    "ignore": ["reveal-analytics.js", "reveal-analytics.esm.js"]
   },
   "formatter": {
     "enabled": true,
