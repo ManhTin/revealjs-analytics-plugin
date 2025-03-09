@@ -25,7 +25,7 @@ import { tracksDwellTimePerSlide, tracksTotalDwellTime } from "./utils";
  */
 const Plugin = () => {
   // Merge default config with user config
-  const config = { ...DEFAULT_CONFIG, ...Reveal.getConfig().ppTracking };
+  const config = { ...DEFAULT_CONFIG, ...Reveal.getConfig().revealAnalytics };
 
   // Event logging arrays
   const eventLogs = {

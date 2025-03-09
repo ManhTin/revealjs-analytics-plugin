@@ -7,17 +7,18 @@
 
 	<title>La mer (Debussy)</title>
 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reset.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/serif.min.css">
+	<link rel="stylesheet" href="public/reset.min.css">
+	<link rel="stylesheet" href="public/reveal.min.css">
+	<link rel="stylesheet" href="public/serif.min.css">
 
 	<!-- set custom font -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-		rel="stylesheet">
+	<link href="public/fonts.css" rel="stylesheet">
 
-	<link rel="stylesheet" href="demo/custom.css">
+	<link rel="stylesheet" href="public/custom.css">
+
+	<link rel="icon" type="image/svg+xml" href="public/favicon.svg">
 </head>
 
 <body>
@@ -154,7 +155,7 @@
 
 
 			<section>
-				<script data-quiz="quiz" src="demo/quiz.js"></script>
+				<script data-quiz="quiz" src="public/quiz.js"></script>
 			</section>
 
 			<!-- References -->
@@ -176,7 +177,7 @@
 		</div>
 	</div>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
+	<script src="public/reveal.min.js"></script>
 	<script src="plugin/reveal-analytics/reveal-analytics.js"></script>
 	<script>
 		// More info about initialization & config:
@@ -190,7 +191,7 @@
 				skipStartButton: false,
 			},
 
-			ppTracking: {
+			revealAnalytics: {
 				apiConfig: { trackingAPI: "http://localhost:3000/api/track_event", presentationId: "cm7m27i3g0002jto1007wnivz" },
 				revealDependencies: {
 					quiz: true,
@@ -201,7 +202,7 @@
 			dependencies: [
 				{ src: 'plugin/quiz/js/quiz.js' },
 			],
-			plugins: [RevealPPTracking],
+			plugins: [RevealAnalytics],
 		});
 	</script>
 </body>
