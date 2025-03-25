@@ -7,10 +7,18 @@
 
 	<title>La mer (Debussy)</title>
 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reset.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/serif.min.css">
+	<link rel="stylesheet" href="/public/reset.min.css">
+	<link rel="stylesheet" href="/public/reveal.min.css">
+	<link rel="stylesheet" href="/public/serif.min.css">
 
+	<!-- set custom font -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="public/fonts.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="/public/custom.css">
+
+	<link rel="icon" type="image/svg+xml" href="/public/favicon.svg">
 </head>
 
 <body>
@@ -33,6 +41,9 @@
 					<li>Called "Three symphonic sketches" by Debussy avoiding the term symphony</li>
 					<li>second of Debussy's three orchestral works</li>
 				</ul>
+				<a class="footnote" href="#/4">
+					Internal Link to first movement
+				</a>
 			</section>
 
 			<section>
@@ -62,41 +73,58 @@
 				<h2>Three Movements</h2>
 				<section>
 					<p>I. "De l'aube à midi sur la mer" (From dawn to noon on the sea)</p>
-					<audio
+					<audio id="La Mer - First Movement"
 						data-src="https://upload.wikimedia.org/wikipedia/commons/5/51/La_mer_-_I._De_l%27aube_%C3%A0_midi_sur_la_mer_-_Concert_Band_-_United_States_Air_Force_Band.mp3"
 						controls>
 					</audio>
 					<a class="footnote"
-						href="https://en.wikipedia.org/wiki/File:La_mer_-_I._De_l%27aube_%C3%A0_midi_sur_la_mer_-_Concert_Band_-_United_States_Air_Force_Band.mp3">
-						[Audio: La mer - I. De l'aube à midi sur la mer - Concert Band - United States Air Force Band. (2000).
-						Wikimedia Commons]
+						href="https://en.wikipedia.org/wiki/File:La_mer_-_I._De_l%27aube_%C3%A0_midi_sur_la_mer_-_Concert_Band_-_United_States_Air_Force_Band.mp3"
+						target="_blank">
+						La mer - I. De l'aube à midi sur la mer - Concert Band - United States Air Force Band. (2000).
+						Wikimedia Commons
 					</a>
 				</section>
 				<section>
 					<p>II. "Jeux de vagues" (Play of the waves)</p>
-					<audio
+					<audio id="La Mer - Second Movement"
 						data-src="https://upload.wikimedia.org/wikipedia/commons/a/a0/La_mer_-_II._Jeux_de_vagues_-_Concert_Band_-_United_States_Air_Force_Band.mp3"
 						controls>
 					</audio>
 					<a class="footnote"
-						href="https://en.wikipedia.org/wiki/File:La_mer_-_II._Jeux_de_vagues_-_Concert_Band_-_United_States_Air_Force_Band.mp3">
-						[Audio: La mer - II. Jeux de vagues - Concert Band - United States Air Force Band. (2000). Wikimedia
-						Commons]
+						href="https://en.wikipedia.org/wiki/File:La_mer_-_II._Jeux_de_vagues_-_Concert_Band_-_United_States_Air_Force_Band.mp3"
+						target="_blank">
+						La mer - II. Jeux de vagues - Concert Band - United States Air Force Band. (2000). Wikimedia
+						Commons
 					</a>
 				</section>
 				<section>
 					<p>III. "Dialogue du vent et de la mer" (Dialogue of the wind and the sea)</p>
-					<audio
+					<audio id="La Mer - Third Movement"
 						data-src="https://upload.wikimedia.org/wikipedia/commons/5/50/La_mer_-_III._Dialogue_du_vent_et_de_la_mer_-_Concert_Band_-_United_States_Air_Force_Band.mp3"
 						controls>
 					</audio>
 					<a class="footnote"
-						href="https://en.wikipedia.org/wiki/File:La_mer_-_III._Dialogue_du_vent_et_de_la_mer_-_Concert_Band_-_United_States_Air_Force_Band.mp3">
-						[Audio: La mer - III. Dialogue du vent et de la mer - Concert Band - United States Air Force Band. (2000).
-						Wikimedia Commons]
+						href="https://en.wikipedia.org/wiki/File:La_mer_-_III._Dialogue_du_vent_et_de_la_mer_-_Concert_Band_-_United_States_Air_Force_Band.mp3"
+						target="_blank">
+						La mer - III. Dialogue du vent et de la mer - Concert Band - United States Air Force Band. (2000).
+						Wikimedia Commons
 					</a>
 				</section>
 				</ol>
+			</section>
+
+			<!-- Video -->
+			<section>
+				<video id="Lunar Eclipse 2018"
+					data-src="https://upload.wikimedia.org/wikipedia/commons/7/7f/Lunar_eclipse_2018_in_Slovenia.webm" controls>
+				</video>
+				<span class="footnote">
+					<a href="https://commons.wikimedia.org/wiki/File:Lunar_eclipse_2018_in_Slovenia.webm" target="_blank">
+						Jakob Žvab
+					</a>,
+					<a href="https://creativecommons.org/licenses/by/3.0" target="_blank">CC BY 3.0</a>, via Wikimedia
+					Commons
+				</span>
 			</section>
 
 			<!-- Inspiration -->
@@ -107,8 +135,9 @@
 					alt="Placeholder for The Great Wave off Kanagawa by Hokusai">
 				<p><small>Katsushika Hokusai's "The Great Wave off Kanagawa" - Used on the original score's cover</small></p>
 				<a class="footnote"
-					href="https://commons.wikimedia.org/w/index.php?title=File:Debussy_-_La_Mer_-_The_great_wave_of_Kanaga_from_Hokusai.jpg&oldid=544296653">
-					[Image: Debussy - La Mer - The great wave of Kanaga from Hokusai. (2021, March 20). Wikimedia Commons]
+					href="https://commons.wikimedia.org/w/index.php?title=File:Debussy_-_La_Mer_-_The_great_wave_of_Kanaga_from_Hokusai.jpg&oldid=544296653"
+					target="_blank">
+					Debussy - La Mer - The great wave of Kanaga from Hokusai. (2021, March 20). Wikimedia Commons
 				</a>
 			</section>
 
@@ -144,7 +173,7 @@
 
 
 			<section>
-				<script data-quiz="quiz" src="demo/quiz.js"></script>
+				<script data-quiz="quiz" src="public/quiz.js"></script>
 			</section>
 
 			<!-- References -->
@@ -154,20 +183,22 @@
 					<li class="reference">
 						Title Image: Debussy - La Mer - The great wave of Kanaga from Hokusai.jpg. (2021, March 20). Wikimedia
 						Commons. Retrieved 17:21, February 12, 2025 from <a
-							href="https://commons.wikimedia.org/w/index.php?title=File:Debussy_-_La_Mer_-_The_great_wave_of_Kanaga_from_Hokusai.jpg&oldid=544296653">https://commons.wikimedia.org/w/index.php?title=File:Debussy_-_La_Mer_-_The_great_wave_of_Kanaga_from_Hokusai.jpg&oldid=544296653</a>.
+							href="https://commons.wikimedia.org/w/index.php?title=File:Debussy_-_La_Mer_-_The_great_wave_of_Kanaga_from_Hokusai.jpg&oldid=544296653"
+							target="_blank">https://commons.wikimedia.org/w/index.php?title=File:Debussy_-_La_Mer_-_The_great_wave_of_Kanaga_from_Hokusai.jpg&oldid=544296653</a>.
 					</li>
 					<li class="reference">
 						Text according to: Wikipedia contributors. (2025, February 11). La mer (Debussy). In Wikipedia, The Free
 						Encyclopedia. Retrieved 17:18, February 12, 2025, from <a
-							href="https://en.wikipedia.org/w/index.php?title=La_mer_(Debussy)&oldid=1275088850">https://en.wikipedia.org/w/index.php?title=La_mer_(Debussy)&oldid=1275088850</a>.
+							href="https://en.wikipedia.org/w/index.php?title=La_mer_(Debussy)&oldid=1275088850"
+							target="_blank">https://en.wikipedia.org/w/index.php?title=La_mer_(Debussy)&oldid=1275088850</a>.
 					</li>
 				</ul>
 			</section>
 		</div>
 	</div>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
-	<script src="plugin/reveal-analytics/reveal-analytics.js"></script>
+	<script src="/public/reveal.min.js"></script>
+	<script src="/plugin/reveal-analytics/reveal-analytics.js"></script>
 	<script>
 		// More info about initialization & config:
 		// - https://revealjs.com/initialization/
@@ -181,11 +212,7 @@
 			},
 
 			revealAnalytics: {
-				apiConfig: { trackingAPI: "http://localhost:3000/api/track_event", presentationId: "cm7cezgiz0002jtgkryn6o95b" },
-				dwellTimes: true,
-				links: true,
-				media: true,
-				slideTransitions: true,
+				apiConfig: { trackingAPI: "http://localhost:3000/api/v1/track_event", presentationId: "cm7m27i3g0002jto1007wnivz" },
 				revealDependencies: {
 					quiz: true,
 				},
@@ -193,7 +220,7 @@
 			},
 
 			dependencies: [
-				{ src: 'plugin/quiz/js/quiz.js' },
+				{ src: '/plugin/quiz/js/quiz.js' },
 			],
 			plugins: [RevealAnalytics],
 		});

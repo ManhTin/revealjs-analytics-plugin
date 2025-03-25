@@ -17,7 +17,7 @@ import {
   trackQuizzes,
   trackStart,
 } from "./trackers";
-import { tracksDwellTimePerSlide, tracksTotalDwellTime } from "./utils";
+import { tracksDwellTimePerSlide } from "./utils";
 
 /**
  * PP Tracking Plugin for reveal.js
@@ -67,30 +67,11 @@ const Plugin = () => {
    * Adds all event listeners for tracking
    */
   const addEventListeners = () => {
-    // Only add trackers if tracking is allowed
-    if (!optOutManager.isTrackingAllowed()) {
-      if (config.debug) {
-        console.log("User opted out of tracking, no events will be tracked");
-      }
-      return;
-    }
-
-    // Track presentation start
     trackStart(config, eventLogs.logPresentationStartEvents);
-
-    // Track dwell times
     trackDwellTimes(config, eventLogs.logSlideViewEvents, slideTimer);
-
-    // Track user leaving presentation
     trackClosing(config, eventLogs, globalTimer, optOutManager);
-
-    // Track links
     trackLinks(config, eventLogs.logLinkActionEvents);
-
-    // Track media interactions
     trackMediaActions(config, eventLogs.logMediaActionEvents);
-
-    // Track quiz interactions
     trackQuizzes(config, eventLogs.logQuizActionEvents);
   };
 

@@ -20,7 +20,6 @@ export class OptOutManager {
     if (this.initialized) return this.trackingAllowed;
 
     setTimeout(() => this.showPopup(), this.config.popupDelay);
-    // }
 
     this.initialized = true;
     return this.trackingAllowed;
@@ -30,11 +29,9 @@ export class OptOutManager {
    * Create and show the opt-out popup
    */
   showPopup() {
-    // Create popup element
     this.popup = document.createElement("div");
     this.popup.className = "reveal-analytics-popup";
 
-    // Add content to popup
     this.popup.innerHTML = `
       <span class="reveal-tracking-close">&times;</span>
       <p>This presentation uses analytics to improve content. No personal data is collected.</p>
@@ -44,7 +41,6 @@ export class OptOutManager {
       </div>
     `;
 
-    // Add event listeners
     this.popup
       .querySelector(".reveal-tracking-close")
       .addEventListener("click", () => {
@@ -63,7 +59,6 @@ export class OptOutManager {
         this.optOut();
       });
 
-    // Add to document
     document.body.appendChild(this.popup);
   }
 
