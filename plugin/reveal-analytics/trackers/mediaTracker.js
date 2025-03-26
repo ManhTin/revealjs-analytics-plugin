@@ -39,6 +39,10 @@ export const trackMediaActions = (config, logMediaActionEvents) => {
             totalDuration: Number.parseInt(this.duration, 10),
             ...mediaMetadata,
           });
+          console.log(
+            "logMediaActionEvent:",
+            logMediaActionEvents.slice(-1)[0],
+          );
 
           if (config.debug) {
             console.log("🚀 Media played:", logMediaActionEvents);
@@ -61,6 +65,10 @@ export const trackMediaActions = (config, logMediaActionEvents) => {
             finished: this.ended,
             ...mediaMetadata,
           });
+          console.log(
+            "logMediaActionEvent:",
+            logMediaActionEvents.slice(-1)[0],
+          );
         };
       }
     }

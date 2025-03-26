@@ -16,5 +16,9 @@ export const trackStart = (config, logPresentationStartEvents) => {
       timestamp: new Date().toISOString(),
       slideNumber: getSlideNumber(currentSlide),
     });
+    console.log(
+      "logPresentationStartEvent:",
+      logPresentationStartEvents.slice(-1)[0],
+    );
   });
 };

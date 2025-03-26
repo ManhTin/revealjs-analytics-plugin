@@ -46,6 +46,7 @@ export const trackQuizzes = (config, logQuizActionEvents) => {
       actionType: QuizEventTypes.START,
       ...quizMetadata,
     });
+    console.log("logQuizActionEvent:", logQuizActionEvents.slice(-1)[0]);
 
     return true;
   };
@@ -84,6 +85,7 @@ export const trackQuizzes = (config, logQuizActionEvents) => {
       score: options.score / quiz.questions.length,
       ...quizMetadata,
     });
+    console.log("logQuizActionEvent:", logQuizActionEvents.slice(-1)[0]);
 
     return true;
   };

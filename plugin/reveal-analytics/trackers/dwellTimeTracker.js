@@ -21,5 +21,6 @@ export const trackDwellTimes = (config, logSlideViewEvents, slideTimer) => {
     });
 
     slideTimer.reset();
+    console.log("logSlideViewEvent:", logSlideViewEvents.slice(-1)[0]);
   });
 };

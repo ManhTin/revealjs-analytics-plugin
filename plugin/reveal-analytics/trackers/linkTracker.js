@@ -43,6 +43,7 @@ export const trackLinks = (config, logLinkActionEvents) => {
         linkUrl: href,
         linkText: event.target.text.trim(),
       });
+      console.log("logLinkActionEvent", logLinkActionEvents.slice(-1)[0]);
     }
   });
 };
