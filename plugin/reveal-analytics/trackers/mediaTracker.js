@@ -16,7 +16,6 @@ export const trackMediaActions = (config, logMediaActionEvents) => {
 
   const setupMediaTracking = () => {
     const mediaElements = getTrackableMedia(config);
-    const currentSlide = Reveal.getCurrentSlide();
 
     for (const media of mediaElements) {
       const mediaMetadata = {
@@ -29,10 +28,12 @@ export const trackMediaActions = (config, logMediaActionEvents) => {
 
       if (!media.onplay) {
         media.onplay = function onPlay() {
+          const currentSlide = Reveal.getCurrentSlide();
+          const slideNumber = getSlideNumber(currentSlide);
           logMediaActionEvents.push({
             timestamp: new Date().toISOString(),
             actionType: MediaEventTypes.PLAY,
-            slideNumber: getSlideNumber(currentSlide),
+            slideNumber: slideNumber,
             mediaSource: this.currentSrc,
             currentTime: Number.parseInt(this.currentTime, 10),
             totalDuration: Number.parseInt(this.duration, 10),
@@ -47,10 +48,12 @@ export const trackMediaActions = (config, logMediaActionEvents) => {
 
       if (!media.onpause) {
         media.onpause = function onPause() {
+          const currentSlide = Reveal.getCurrentSlide();
+          const slideNumber = getSlideNumber(currentSlide);
           logMediaActionEvents.push({
             timestamp: new Date().toISOString(),
             actionType: MediaEventTypes.PAUSE,
-            slideNumber: getSlideNumber(currentSlide),
+            slideNumber: slideNumber,
             mediaSource: this.currentSrc,
             currentTime: Number.parseInt(this.currentTime, 10),
             totalDuration: Number.parseInt(this.duration, 10),
