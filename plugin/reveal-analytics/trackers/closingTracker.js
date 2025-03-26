@@ -24,7 +24,7 @@ export const trackClosing = (
   globalTimer,
   optOutManager,
 ) => {
-  window.addEventListener("beforeunload", () => {
+  window.addEventListener("beforeunload", (event) => {
     const currentSlide = Reveal.getCurrentSlide();
     const presentationUrl = window.location.href.replace(/(#(.+)?)/, "");
 
@@ -38,6 +38,10 @@ export const trackClosing = (
         ? globalTimer.getTime()
         : null,
     });
+    console.log(
+      "logPresentationCloseEvent:",
+      logPresentationCloseEvents.slice(-1)[0],
+    );
 
     const payload = {
       logPresentationStartEvents,
@@ -48,15 +52,18 @@ export const trackClosing = (
       logQuizActionEvents,
     };
 
-    if (config.debug) {
-      console.log("🚀 ~ sending events:", payload);
-    }
-
     if (optOutManager.isTrackingAllowed()) {
+      if (config.debug) {
+        console.log("🚀 ~ sending events:", payload);
+      }
+
       navigator.sendBeacon(
         config.apiConfig.trackingAPI,
         JSON.stringify(payload),
       );
     }
+
+    // prevent the site from closing immediately to be able to view the events in the console
+    event.preventDefault();
   });
 };

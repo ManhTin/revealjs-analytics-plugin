@@ -56,6 +56,7 @@ export class OptOutManager {
     this.popup
       .querySelector(".reveal-tracking-decline")
       .addEventListener("click", () => {
+        console.log("Opting out of tracking");
         this.optOut();
       });
 
