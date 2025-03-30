@@ -4,7 +4,7 @@
 export class OptOutManager {
   constructor(config = {}) {
     this.config = {
-      popupDelay: 1000, // ms to wait before showing popup
+      popupDelay: 500, // ms to wait before showing popup
       ...config,
     };
     this.popup = null;
@@ -34,7 +34,7 @@ export class OptOutManager {
 
     this.popup.innerHTML = `
       <span class="reveal-tracking-close">&times;</span>
-      <p>This presentation uses analytics to improve content. No personal data is collected.</p>
+      <p>This presentation uses analytics by default to improve content. Your interactions with presentation elements are logged. No personal data is collected.</p>
       <div class="reveal-analytics-buttons">
         <button class="reveal-analytics-btn reveal-tracking-decline">Opt Out</button>
         <button class="reveal-analytics-btn reveal-tracking-accept">Accept</button>
