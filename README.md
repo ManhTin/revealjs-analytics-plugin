@@ -8,7 +8,7 @@ collect any personal data. Based on the [reveal.js-tracking](https://github.com/
 
 Supports reveal.js version > `4.0.0` (lower versions can work, but were not tested)
 
-Requires the [revealjs-anayltics](https://github.com/ManhTin/revealjs-analytics)
+Requires the [revealjs-analytics](https://github.com/ManhTin/revealjs-analytics)
 application to receive the tracking events and display metrics.
 
 ## Installation
